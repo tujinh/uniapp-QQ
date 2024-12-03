@@ -1,0 +1,57 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "uni-app",
+				"navigationStyle": "custom"
+				// "enablePullDownRefresh":true
+			}
+		},
+		{
+			"path" : "pages/friends/friends",
+			"style" : 
+			{
+				"navigationBarTitleText" : "",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path" : "pages/publish/publish",
+			"style" : 
+			{
+				"navigationBarTitleText" : "",
+				"navigationStyle": "custom"
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	},
+	"tabBar": {
+		"color": "#1a191e",
+		"selectedColor": "#069dff",
+		"borderStyle": "white",
+		"backgroundColor": "#f3f2f7",
+		"list": [{
+			"pagePath": "pages/index/index",
+			"iconPath": "static/tabBar/msg.png",
+			"selectedIconPath": "static/tabBar/msg-h.png",
+			"text": "消息"
+		}, {
+			"pagePath": "pages/friends/friends",
+			"iconPath": "static/tabBar/friends.png",
+			"selectedIconPath": "static/tabBar/friends-h.png",
+			"text": "联系人"
+		}, {
+			"pagePath": "pages/publish/publish",
+			"iconPath": "static/tabBar/publish.png",
+			"selectedIconPath": "static/tabBar/publish-h.png",
+			"text": "动态"
+		}]
+	},
+	"uniIdRouter": {}
+}
