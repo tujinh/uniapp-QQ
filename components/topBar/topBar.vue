@@ -2,14 +2,14 @@
 	<view class="topBar">
 		<view class="container">
 			<view class="left">
-				<view class="avatar">
+				<view @click="toInfo" class="avatar">
 					<image src="../../static/one.png" mode=""></image>
 				</view>
 				<view class="info">
 					<slot name="info"></slot>
 				</view>
 			</view>
-			<view class="right">
+			<view class="right" @click="totest">
 				<slot name="rightbtn"></slot>
 			</view>
 			
@@ -18,7 +18,16 @@
 </template>
 
 <script setup>
-	
+	const toInfo =()=>{
+		uni.navigateTo({
+			url:'/pages/userinfo/userinfo'
+		})
+	}
+	const totest =()=>{
+		uni.navigateTo({
+			url:'/pages/test/test'
+		})
+	}
 </script>
 
 <style lang="scss" scoped>

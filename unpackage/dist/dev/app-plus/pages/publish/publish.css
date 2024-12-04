@@ -624,29 +624,31 @@
 /* 透明度 */
 /* 文章场景相关 */
 .main[data-v-b57098ba] {
-  position: absolute;
-  top: calc(var(--status-bar-height) + 45px);
-  left: 0;
   background: white;
   width: 100vw;
-  border-radius: 1.40625rem 1.40625rem 0 0;
-  padding: 12px 13px 0;
+  border-radius: 1.25rem 1.25rem 0 0;
+  padding: 12px 0 0;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 .main .search[data-v-b57098ba] {
+  width: 100%;
+  padding: 0 13px 18px;
+  box-sizing: border-box;
+}
+.main .search .input[data-v-b57098ba] {
+  box-sizing: border-box;
   height: 32px;
-  width: 98%;
+  width: 100%;
   background: #f5f8ff;
   border-radius: 5px;
   text-align: center;
   line-height: 32px;
   color: #7f8082;
-  margin-bottom: 18px;
 }
-.main .search .icon-search[data-v-b57098ba] {
+.main .search .input .icon-search[data-v-b57098ba] {
   margin-right: 3px;
 }
 /**
@@ -674,12 +676,52 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
+.hover[data-v-bfce3555] {
+  background: #dddddd;
+}
 .content[data-v-bfce3555] {
   width: 100vw;
-  height: 100vh;
+  min-height: calc(100vh - 50px);
   background: #f0f4ff;
   position: relative;
+  padding-top: calc(var(--status-bar-height) + 45px);
+  box-sizing: border-box;
+}
+.content .main[data-v-bfce3555] {
+  min-height: calc(100vh - 95px);
 }
 .content .gear[data-v-bfce3555] {
   margin-left: 7px;
+}
+.content .part-top[data-v-bfce3555], .content .part-mid[data-v-bfce3555], .content .part-bottom[data-v-bfce3555] {
+  width: 100%;
+}
+.content .space[data-v-bfce3555] {
+  position: absolute;
+  left: 0;
+  width: 100vw;
+  height: 10px;
+  background: #f3f2f7;
+}
+.content .list[data-v-bfce3555] {
+  position: relative;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  height: 48px;
+  padding: 0 18px;
+  box-sizing: border-box;
+}
+.content .list uni-image[data-v-bfce3555] {
+  width: 23px;
+  height: 23px;
+  border-radius: 5px;
+}
+.content .list .right[data-v-bfce3555] {
+  font-size: 16px;
+  margin-left: 8px;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }

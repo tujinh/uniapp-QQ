@@ -1,6 +1,6 @@
 <template>
 	<view class="content">
-		<topBar>
+		<topBar class="tb" :style="{top:-moveTop+'px'}">
 			<template #info>
 				<view class="nick">,</view>
 				<view class="status">
@@ -13,11 +13,9 @@
 				<uni-icons class="plus" type="plusempty" size="25"></uni-icons>
 			</template>
 		</topBar>
-		<PageMain>
-			<view class="friend-list">
-				<friendItem></friendItem>
-				<friendItem></friendItem>
-				<friendItem></friendItem>
+		<PageMain class="main" @search="search" @touchstart="touchstart" @touchend="touchend" @touchmove="touchmove" :style="{transform:`translateY(-${moveTop}px)`}">
+			<view class="friend-list" v-show="!isSearch">
+				<friendItem v-for="item in 10"></friendItem>
 			</view>
 		</PageMain>
 	</view>
@@ -25,16 +23,40 @@
 
 <script setup>
 	import {ref} from 'vue'
-	
+	import {onBackPress} from '@dcloudio/uni-app'
+	onBackPress(()=>{
+		isSearch.value=false
+		moveTop.value=0
+	})
+	let isSearch = ref(false)
+	let moveTop = ref(0)
+	const search =()=>{
+		isSearch.value = true
+		moveTop.value = 45
+	}
+	const touchstart=(e)=>{
+		// console.log('statr',e.touches[0])
+	}
+	const touchend =(e)=>{
+		// console.log('end',e.changedTouches[0])
+	}
+	const touchmove=e=>{
+		// console.log('move',e)
+	}
 	//2
 </script>
 
 <style lang="scss" scoped>
 	.content{
 		width: 100vw;
-		height: 100vh;
+		min-height:calc(100vh - 50px);
 		background: #f0f4ff;
 		position: relative;
+		padding-top:calc(var(--status-bar-height) + 45px) ;
+		box-sizing: border-box;
+		.tb,.main{
+			transition: .3s;
+		}
 		.plus{
 			margin-left: 7px;
 		}

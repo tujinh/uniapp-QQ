@@ -1,5 +1,5 @@
 <template>
-	<view class="list">
+	<view class="list" hover-class="hover">
 		<image :class="`avatar-${avatarSize}`" src="../../static/one.png" mode=""></image>
 		<view class="content">
 			<view class="top">
@@ -25,7 +25,12 @@
 </script>
 
 <style lang="scss" scoped>
+	.hover{
+		background: #dddddd;
+	}
 	.list{
+		padding: 0 13px;
+		box-sizing: border-box;
 		width: 100%;
 		height: 60px;
 		display: flex;

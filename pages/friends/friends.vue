@@ -8,7 +8,7 @@
 				<uni-icons type="personadd" size="25"></uni-icons>
 			</template>
 		</topBar>
-		<PageMain>
+		<PageMain class="main">
 			<view class="wantKnow">
 				<view class="title">
 					<text class="text">可能想认识的人</text><uni-icons color="#908f94" type="right" size="18"></uni-icons>
@@ -44,19 +44,20 @@
 	import {ref,onMounted,getCurrentInstance } from 'vue'
 	
 	//选择类型
-	let offsetLeft = ref(11) //左移
-	let choosedId = ref(0) //所选类型id
+	let offsetLeft = ref(0) //左移
+	let choosedId = ref(1) //所选类型id
 	let underlineWidth = ref(32) //下划线宽度
-	// const instance = getCurrentInstance();
-	// const query = uni.createSelectorQuery().in(instance.proxy);
-	// onMounted(()=>{
-	// 	query
-	// 	  .select(".item1")
-	// 	  .boundingClientRect((data) => {
-	// 		offsetLeft.value = data.left - 16
-	// 	  })
-	// 	  .exec();
-	// })
+	const instance = getCurrentInstance();
+	const query = uni.createSelectorQuery().in(instance.proxy);
+	onMounted(()=>{
+		query
+		  .select(".item1")
+		  .boundingClientRect((data) => {
+			  console.log(data)
+			offsetLeft.value = data.left
+		  })
+		  .exec();
+	})
 	let chooseList =['好友','分组','群聊','频道','设备','通讯录']
 	
 	
@@ -70,6 +71,7 @@
 			underlineWidth.value=32
 		}
 		choosedId.value = e.target.id
+		console.log(e.target.offsetLeft)
 		offsetLeft.value=e.target.offsetLeft
 	}
 </script>
@@ -77,9 +79,14 @@
 <style lang="scss" scoped>
 	.content{
 		width: 100vw;
-		height: 100vh;
+		min-height:calc(100vh - 50px);
 		background: #f0f4ff;
 		position: relative;
+		padding-top:calc(var(--status-bar-height) + 45px) ;
+		box-sizing: border-box;
+		.main{
+			min-height: calc(100vh - 95px);
+		}
 		.space{
 			position: absolute;
 			left: 0;
@@ -88,9 +95,11 @@
 			background:#f3f2f7 ;
 		}
 		.wantKnow{
-			width: 98%;
+			width: 100%;
 			margin-bottom: 10px;
 			.title{
+				padding: 0 13px;
+				box-sizing: border-box;
 				display: flex;
 				align-items: center;
 				justify-content: space-between;
@@ -105,6 +114,8 @@
 			height: 100px;
 			margin-bottom: 10px;
 			.notice-item{
+				padding: 0 13px;
+				box-sizing: border-box;
 				height: 50px;
 				width: 100%;
 				display: flex;
@@ -113,16 +124,18 @@
 			}
 		}
 		.group{
-			width: 98%;
+			width: 100%;
 			padding-top: 18px;
 			box-sizing: border-box;
 			.choose{
 				position: relative;
-				width: 100%;
+				width: 98%;
 				display: flex;
 				align-items: center;
 				justify-content: space-around;
 				margin-bottom: 10px;
+				box-sizing: border-box;
+				padding: 0 10px;
 				.choosed{
 					color: #0099ff;
 				}
@@ -136,6 +149,7 @@
 					transition: .2s;
 				}
 			}
+			
 			
 		}
 	}
