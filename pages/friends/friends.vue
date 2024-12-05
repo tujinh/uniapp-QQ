@@ -18,10 +18,10 @@
 			<view class="space"></view>
 			</view>
 			<view class="notice">
-				<view class="notice-item">
+				<view class="notice-item" @click="toApply">
 					<text>新朋友</text><uni-icons color="#908f94" type="right" size="18"></uni-icons>
 				</view>
-				<view class="notice-item">
+				<view class="notice-item" @click="toGroup">
 					<text>群通知</text><uni-icons color="#908f94" type="right" size="18"></uni-icons>
 				</view>
 				<view class="space"></view>
@@ -53,7 +53,6 @@
 		query
 		  .select(".item1")
 		  .boundingClientRect((data) => {
-			  console.log(data)
 			offsetLeft.value = data.left
 		  })
 		  .exec();
@@ -71,8 +70,18 @@
 			underlineWidth.value=32
 		}
 		choosedId.value = e.target.id
-		console.log(e.target.offsetLeft)
 		offsetLeft.value=e.target.offsetLeft
+	}
+	
+	const toApply=()=>{
+		uni.navigateTo({
+			url:'/pages/newfriend/newfriend'
+		})
+	}
+	const toGroup=()=>{
+		uni.navigateTo({
+			url:'/pages/groups/groups'
+		})
 	}
 </script>
 

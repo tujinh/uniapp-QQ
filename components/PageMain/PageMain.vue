@@ -21,10 +21,6 @@
 
 <style lang="scss" scoped>
 	.main{
-		// position: absolute;
-		// top: calc(var(--status-bar-height) + 45px);
-		// left: 0;
-		
 		background: white;
 		width: 100vw;
 		border-radius: 40rpx 40rpx 0 0;

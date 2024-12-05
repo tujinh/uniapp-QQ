@@ -29,6 +29,12 @@
 		line-height: 40px;
 		font-size: 16px;
 	}
+	.sm{
+		width: 57px;
+		height: 25px;
+		line-height: 25px;
+		font-size: 12px;
+	}
 	.white{
 		border: 1px solid rgba(206, 206, 206);
 		color: black;

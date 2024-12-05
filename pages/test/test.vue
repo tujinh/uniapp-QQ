@@ -1,5 +1,5 @@
 <template>
-	<LeftPop></LeftPop>
+	<commontb></commontb>
 </template>
 
 <script>

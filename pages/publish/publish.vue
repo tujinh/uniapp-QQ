@@ -5,7 +5,7 @@
 				<view class="pos">动态</view>
 			</template>
 			<template #rightbtn>
-				<uni-icons type="settings" size="25"></uni-icons>
+				<uni-icons type="tune" size="25"></uni-icons>
 				<uni-icons class="gear" type="gear" size="25"></uni-icons>
 			</template>
 		</topBar>

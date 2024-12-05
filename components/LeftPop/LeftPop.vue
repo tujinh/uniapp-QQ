@@ -1,5 +1,5 @@
 <template>
-	<view class="content">
+	<view class="container">
 		<view class="top">
 			<view class="clock-in">
 				<uni-icons type="calendar" color="white" size="20"></uni-icons>
@@ -11,7 +11,7 @@
 		</view>
 		<image class="bg" src="../../static/one.png" mode="aspectFill"></image>
 		<view class="main">
-			<view class="main-top">
+			<view class="main-top" @click="toInfo">
 				<image class="avatar" src="../../static/one.png" mode=""></image>
 				<view class="info">
 					<text class="nick">,</text>
@@ -45,29 +45,35 @@
 
 <script setup>
 	
+	
+	const toInfo =()=>{
+		uni.navigateTo({
+			url:'/pages/userinfo/userinfo'
+		})
+	}
 </script>
 
 <style lang="scss" scoped>
-	.content{
+	.container{
 		width: 100vw;
 		height: 100vh;
-		position: relative;
+		// position: relative;
 		.bg{
 			width: 100%;
 			height: 200px;
 		}
 		.top{
-			z-index: 100;
 			padding-top: calc(var(--status-bar-height) + 10px) ;
 			padding-left: 10px;
 			padding-bottom: 10px;
 			padding-right: 10px;
 			width: 100%;
-			position: fixed;
+			position: absolute;
 			box-sizing: border-box;
 			top: 0;
 			left: 0;
 			display: flex;
+			z-index: 1001;
 			justify-content: space-between;
 			.clock-in{
 				display: flex;
@@ -163,7 +169,7 @@
 			bottom: 10px;
 			padding: 0 20px;
 			box-sizing: border-box;
-			z-index: 99;
+			z-index: 1002;
 			display: flex;
 			background: #f3f2f7;
 			width: 100%;
