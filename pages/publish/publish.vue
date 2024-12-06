@@ -11,7 +11,7 @@
 		</topBar>
 		<PageMain class="main">
 			<view class="part-top">
-				<view class="list" hover-class="hover">
+				<view class="list" hover-class="hover" @click="toZone">
 					<image :src="publishList[0].img" mode=""></image>
 					<view class="right">
 						<text class="title">{{publishList[0].title}}</text>
@@ -46,6 +46,13 @@
 
 <script setup>
 	import { publishList } from '../../common/data';
+	
+	
+	const toZone =()=>{
+		uni.navigateTo({
+			url:'/pages/myzone/myzone'
+		})
+	}
 </script>
 
 <style lang="scss" scoped>

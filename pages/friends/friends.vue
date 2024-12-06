@@ -5,7 +5,7 @@
 				<view class="pos">联系人</view>
 			</template>
 			<template #rightbtn>
-				<uni-icons type="personadd" size="25"></uni-icons>
+				<uni-icons @click="toAdd" type="personadd" size="25"></uni-icons>
 			</template>
 		</topBar>
 		<PageMain class="main">
@@ -81,6 +81,12 @@
 	const toGroup=()=>{
 		uni.navigateTo({
 			url:'/pages/groups/groups'
+		})
+	}
+	
+	const toAdd =()=>{
+		uni.navigateTo({
+			url:'/pages/add/add'
 		})
 	}
 </script>

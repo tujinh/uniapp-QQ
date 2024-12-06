@@ -2,9 +2,11 @@
 	<view class="topBar">
 		<view class="container">
 			<view class="left">
-				<view @click="emit('popLeft')" class="avatar">
-					<image src="../../static/one.png" mode=""></image>
-				</view>
+				<slot>
+					<view @click="emit('popLeft')" class="avatar">
+						<image src="../../static/one.png" mode=""></image>
+					</view>
+				</slot>
 				<view class="info">
 					<slot name="info"></slot>
 				</view>
@@ -12,23 +14,12 @@
 			<view class="right" >
 				<slot name="rightbtn"></slot>
 			</view>
-			
 		</view>
 	</view>
 </template>
 
 <script setup>
 	const emit = defineEmits(['popLeft'])
-	// const toInfo =()=>{
-	// 	uni.navigateTo({
-	// 		url:'/pages/userinfo/userinfo'
-	// 	})
-	// }
-	// const totest =()=>{
-	// 	uni.navigateTo({
-	// 		url:'/pages/test/test'
-	// 	})
-	// }
 </script>
 
 <style lang="scss" scoped>

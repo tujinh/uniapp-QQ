@@ -1,5 +1,5 @@
 <template>
-	<view class="content">
+	<view class="content" :style="{transform:`scale(${contentscale})`}">
 		<topBar @popLeft="popLeft" class="tb" :style="{top:-moveTop+'px'}">
 			<template #info>
 				<view class="nick">,</view>
@@ -19,13 +19,13 @@
 			</view>
 		</PageMain>
 	</view>
-	<view  class="addpop" :style="{transform:`scale(${scale})`}">
+	<view class="addpop" :style="{transform:`scale(${scale})`}">
 		<view class="item" v-for="item in 6">
 			<uni-icons class="icon" type="gift" size="25"></uni-icons>
 			<text>创建频道</text>
 		</view>
 	</view>
-	<view @click="clickCover" v-show="showAddPop" class="cover"></view>
+	<view @click="clickCover" v-show="showCover" class="cover" :style="{opacity:coveropacity}"></view>
 	<LeftPop @touchstart="popstart" @touchend="popend" @touchmove="popmove" class="leftpop" :style="{transform:`translateX(${moveRight}px)`}"></LeftPop>
 </template>
 
@@ -33,6 +33,8 @@
 	import {ref,watch} from 'vue'
 	import {onBackPress} from '@dcloudio/uni-app'
 	let scale = ref(0)
+	let contentscale = ref(1)
+	let coveropacity = ref(0)
 	let {windowWidth} = uni.getSystemInfoSync()
 	onBackPress(()=>{
 		isSearch.value=false
@@ -44,7 +46,7 @@
 		isSearch.value = true
 		moveTop.value = 45
 	}
-	let showAddPop = ref(false)
+	let showCover = ref(false)
 	let csx,sx,sy,st
 	let toRight=ref(true)
 	let moveRight = ref(0)
@@ -53,8 +55,14 @@
 	watch(moveRight,(newValue)=>{
 		if(newValue!=0){
 			uni.hideTabBar()
+			showCover.value = true
+			contentscale.value =1-(0.07/windowWidth*moveRight.value)
+			coveropacity.value = 0.3/windowWidth*moveRight.value
 		}else{
 			uni.showTabBar()
+			showCover.value = false
+			contentscale.value=1
+			coveropacity.value=0
 		}
 	})
 	const touchstart=(e)=>{
@@ -69,7 +77,6 @@
 		if((moveRight.value==0)&&(offsetX<0)){
 			return
 		}
-		// console.log('y',e.touches[0].clientY-sy,'x',e.touches[0].clientX-sx)
 		if(movecount==0){
 			if((Math.abs(offsetY))>(Math.abs(offsetX))){
 				toRight.value= false
@@ -151,20 +158,32 @@
 	}
 	
 	const handleAddPop = ()=>{
-		if(!showAddPop.value){
-			showAddPop.value = true
+		if(!showCover.value){
+			showCover.value = true
+			coveropacity.value=0.3
 			scale.value=1
 		}
 	}
 	
 	const clickCover = ()=>{
-		showAddPop.value = false
+		showCover.value = false
+
 		scale.value=0
 	}
 
 	//2
 </script>
 
+
+
+
+<style>
+	page{
+		width: 100vw;
+		height: 100vh;
+		background: #f0f4ff;
+	}
+</style>
 <style lang="scss" scoped>
 	.cover{
 		z-index: 1000;
@@ -173,7 +192,8 @@
 		top: 0;
 		width: 100vw;
 		height: 100vh;
-		background: rgba(157, 157, 157, 0.3);
+		background: rgb(157, 157, 157);
+		transition: .3s;
 	}
 	.addpop{
 		z-index: 2000;
@@ -222,6 +242,7 @@
 		position: relative;
 		padding-top:calc(var(--status-bar-height) + 45px) ;
 		box-sizing: border-box;
+		transition: .3s;
 		.tb,.main{
 			transition: .3s;
 		}
