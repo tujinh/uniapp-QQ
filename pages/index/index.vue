@@ -17,6 +17,7 @@
 			<view class="friend-list" v-show="!isSearch">
 				<friendItem v-for="item in 10"></friendItem>
 			</view>
+			<searchC @pageset="pageset" v-show="isSearch"></searchC>
 		</PageMain>
 	</view>
 	<view class="addpop" :style="{transform:`scale(${scale})`}">
@@ -27,6 +28,10 @@
 	</view>
 	<view @click="clickCover" v-show="showCover" class="cover" :style="{opacity:coveropacity}"></view>
 	<LeftPop @touchstart="popstart" @touchend="popend" @touchmove="popmove" class="leftpop" :style="{transform:`translateX(${moveRight}px)`}"></LeftPop>
+	<uni-transition ref="dp" :styles="styles" :show="showpageset" >
+		<DownPop></DownPop>
+	</uni-transition>
+	
 </template>
 
 <script setup>
@@ -35,16 +40,39 @@
 	let scale = ref(0)
 	let contentscale = ref(1)
 	let coveropacity = ref(0)
+	let dp = ref()
 	let {windowWidth} = uni.getSystemInfoSync()
+	let styles ={
+		'zIndex':'5000',
+		'position':'fixed',
+		'bottom':'0',
+		'transform':'translateY(100%)',
+		'width': '100vw'
+	}
 	onBackPress(()=>{
 		isSearch.value=false
 		moveTop.value=0
 	})
+	let showpageset = ref(false)
+	const pageset = ()=>{
+		showpageset.value = true
+		coveropacity.value = 0.3
+		showCover.value = true
+		dp.value.init({
+			duration:300
+		})
+		dp.value.step({
+			translateY:'0'
+		})
+		dp.value.run()
+		
+	}
 	let isSearch = ref(false)
 	let moveTop = ref(0)
 	const search =()=>{
 		isSearch.value = true
 		moveTop.value = 45
+		uni.hideTabBar()
 	}
 	let showCover = ref(false)
 	let csx,sx,sy,st
@@ -167,7 +195,14 @@
 	
 	const clickCover = ()=>{
 		showCover.value = false
-
+		showpageset.value = false
+		dp.value.init({
+			duration:300
+		})
+		dp.value.step({
+			translateY:'100%'
+		})
+		dp.value.run()
 		scale.value=0
 	}
 
@@ -179,12 +214,21 @@
 
 <style>
 	page{
-		width: 100vw;
-		height: 100vh;
+		/* width: 100vw;
+		height: 100vh; */
 		background: #f0f4ff;
 	}
 </style>
 <style lang="scss" scoped>
+	.v-enter-active,.v-leave-active{
+		transition: .3s;
+	}
+	.v-enter-from,.v-leave-to{
+		transform: translateY(100%);
+	}
+	.v-enter-to,.v-leave-from{
+		transform: translateY(0);
+	}
 	.cover{
 		z-index: 1000;
 		position: fixed;
@@ -229,7 +273,7 @@
 		}
 	}
 	.leftpop{
-		position: fixed;
+		position: absolute;
 		top: 0;
 		left: -100%;
 		z-index: 1000;
@@ -237,10 +281,11 @@
 	}
 	.content{
 		width: 100vw;
-		min-height:100vh;
+		height:100vh;
 		background: #f0f4ff;
 		position: relative;
 		padding-top:calc(var(--status-bar-height) + 45px) ;
+		// padding-bottom: 50px;
 		box-sizing: border-box;
 		transition: .3s;
 		.tb,.main{

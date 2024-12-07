@@ -20,7 +20,7 @@
 				</view>
 				<view class="space"></view>
 			</view>
-			<view class="part-mid" style="margin-top: 10px;" >
+			<view @click="totest" class="part-mid" style="margin-top: 10px;" >
 				<view  class="list" v-for="item in publishList.slice(1,4)" hover-class="hover">
 					<image :src="item.img" mode=""></image>
 					<view class="right">
@@ -47,7 +47,11 @@
 <script setup>
 	import { publishList } from '../../common/data';
 	
-	
+	const totest =()=>{
+		uni.navigateTo({
+			url:'/pages/test/test'
+		})
+	}
 	const toZone =()=>{
 		uni.navigateTo({
 			url:'/pages/myzone/myzone'

@@ -629,14 +629,22 @@
   box-sizing: border-box;
 }
 .search .input[data-v-2df110ac] {
+  position: relative;
   box-sizing: border-box;
   height: 32px;
   width: 100%;
   background: #f5f8ff;
   border-radius: 5px;
+  color: #7f8082;
+}
+.search .input .content[data-v-2df110ac] {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   text-align: center;
   line-height: 32px;
-  color: #7f8082;
+  transition: 0.3s;
 }
 .search .input .icon-search[data-v-2df110ac] {
   margin-right: 3px;
